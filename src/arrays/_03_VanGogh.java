@@ -11,7 +11,7 @@ import processing.core.PImage;
  * 
  * 2. In the initializePaintings() method, initialize the PImage array to
  *    contain 4 images.
- * 
+ *  
  * 3. Use the loadImage() method to assign each of the 4 images in the /images
  *    folder to an index in the PImage array
  *    "starryNight.jpg", "strawHatPortrait.jpg",
@@ -49,19 +49,30 @@ import processing.core.PImage;
 public class _03_VanGogh extends PApplet {
     PImage canvas;
     PImage paintbrushCursor;
+    
     boolean initializeCanvas = true;
+    String imageList = "src/images/";
     
     /*
      * Write your code below
      */
     Brush brush;
+    PImage[] imgArr;
+    int counter;
     
     void initializePaintings() {
-        
+        imgArr = new PImage[4];
+        String[] paintingArr = new String[] {"painterOnRoad.jpg", "starryNight.jpg", "strawHatPortrait.jpg", "wheatField.jpg"};
+        counter = 0;
+        for(int i = 0; i < imgArr.length; i++) {
+        	imgArr[i] = loadImage(paintingArr[i]);	
+        }
+        brush.setNewPainting(imgArr[counter]);
     }
     
     void selectNextPainting() {
-        
+        counter = (counter +1)% imgArr.length;
+        brush.setNewPainting(imgArr[counter]);
     }
 
     @Override
